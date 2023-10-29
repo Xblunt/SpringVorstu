@@ -10,6 +10,7 @@ public class VorstuApplication {
 
 	private static Initializer initiator;
 
+
 	@Autowired
 	public void setInitialLoader(Initializer initiator) {
 		VorstuApplication.initiator = initiator;

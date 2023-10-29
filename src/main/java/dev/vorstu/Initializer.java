@@ -10,6 +10,7 @@ public class Initializer {
     @Autowired
     private StudentRepository studentRepository;
 
+
     public void initial() {
         studentRepository.save(new Student("Ignat", "g1", "+7999"));
         studentRepository.save(new Student("Masson", "g2", "+7988"));

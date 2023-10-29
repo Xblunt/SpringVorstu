@@ -26,6 +26,7 @@ public class BaseController {
 //    @GetMapping("/students")
 //    public List<Student> students(){
 //        return (List)studentRepository.findAll();
+
     @GetMapping("/students")
         public List<Student> students() {
             return (List)studentRepository.findAll();
