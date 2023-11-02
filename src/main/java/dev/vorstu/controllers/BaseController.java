@@ -7,32 +7,97 @@ package dev.vorstu.controllers;
 import dev.vorstu.dto.Student;
 import dev.vorstu.repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-
-
 //import javax.rmi.CORBA.Stub;
 
 @RestController
 @RequestMapping("/api/base")
 
 public class BaseController {
-
+    private final StudentRepository studentRepository;
     @Autowired
-    private StudentRepository studentRepository;
+
+    public BaseController(StudentRepository studentRepository) {
+        this.studentRepository = studentRepository;
+    }
 //
 //    @GetMapping("/students")
 //    public List<Student> students(){
 //        return (List)studentRepository.findAll();
 
-    @GetMapping("/students")
-        public List<Student> students() {
-            return (List)studentRepository.findAll();
-        }
+//    @GetMapping("/students")
+//        public List<Student> students() {
+//            return (List)studentRepository.findAll();
+//        }
+//    @GetMapping("/students")
+//    public Page<Student> getAllStudents(@PageableDefault(size = 2) int page, Pageable pageable) {return studentRepository.findAll(pageable);}
 
+
+//    @GetMapping("/students")
+//    public Page<Student> getAllStudents(@RequestParam(defaultValue = "0") int page,
+//                                        @RequestParam(defaultValue = "2") int size,
+//                                        @RequestParam(defaultValue = "id") String sortBy) {
+//        PageRequest pageRequest = PageRequest.of(page, size, Sort.by(sortBy));
+//        return studentRepository.findAll(pageRequest);
+//    }
+
+
+
+
+
+
+//    @GetMapping("/students")
+//    public Page<StudentRepository> getAllStudents(@RequestParam( defaultValue = "0") int page,
+//                                   @RequestParam( defaultValue = "2") int size,
+//                                  @RequestParam(defaultValue = "id") String sortBy)
+//    {
+////        PageRequest pageRequest = PageRequest.of(page, size);
+//        PageRequest pageRequest = PageRequest.of(page,size, Sort.by(sortBy));
+//        return StudentRepository.findAll(pageRequest);
+
+//        @GetMapping("users/{pageIndex}/{pageSize}")
+//        public Page<AuthUserEntity> getAllUsers(@PathVariable("pageIndex")int pageIndex,
+//        @PathVariable("pageSize")int pageSize) {
+//            return authUserRepo.findAll(PageRequest.of(pageIndex,pageSize, (Sort) Sort.by("id")));
+//        return new PageImpl<>(pageRequest, pageResult.getAllStudents());
+
+//    }
 //    @PostMapping(value="/students", produces = MediaType.APPLICATION_JSON_VALUE)
+
+
+
+//    @GetMapping("/students")
+//    public Page<Student> geAllStudents(
+//            @RequestParam(defaultValue = "0") int page,
+//            @RequestParam(defaultValue = "2") int size,
+//            @RequestParam(defaultValue = "id") String sortBy
+//    ) {
+//        PageRequest pageRequest = PageRequest.of(page, size, Sort.by(sortBy));
+//        return studentRepository.findAll(pageRequest);
+//    }
+
+//        @GetMapping("/students")
+//    public Page<Student> getAllStudents(@RequestParam(defaultValue = "0") int page,
+//                                        @RequestParam(defaultValue = "2") int size,
+//                                        @RequestParam(defaultValue = "id") String sortBy) {
+//        PageRequest pageRequest = PageRequest.of(page, size, Sort.by(sortBy));
+//        return studentRepository.findAll(pageRequest);
+//    }
+
+    @GetMapping("/students")
+    public Page<Student> geAllStudents(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "2") int size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        return studentRepository.findAll(pageRequest);
+    }
+//    @GetMapping("/students")
+//    public List<Student> students() {
+//        return (List)studentRepository.findAll();
+//    }
     @PostMapping(value = "/students", consumes = "application/json", produces = "application/json")
 //          value = "/students", produces = "application/json")
     public Student createStudent(@RequestBody Student newStudent){
